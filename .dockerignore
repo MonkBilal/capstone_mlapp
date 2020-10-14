@@ -10,3 +10,6 @@ README-secret.md
 Deployment
 Deployment/*
 Jenkinsfile
+AnsibleJenkins2.yml
+cluster.yml
+inventory

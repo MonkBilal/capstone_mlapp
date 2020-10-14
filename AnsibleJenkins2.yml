@@ -98,6 +98,6 @@
 
   - name: Creating eks cluster
     become: false
-    shell: eksctl create cluster -f /home/ubuntu/cluster.yml & 
+    shell: eksctl create cluster -f /home/ubuntu/cluster.yml  
     tags:
      - create cluster
