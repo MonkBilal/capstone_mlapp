@@ -22,7 +22,7 @@
           app: capstone-mlapp
       spec:
         containers:
-        - image: monkbilal/capstone_mlapp:green
+        - image: monkbilal/capstone_mlapp:greenv1
           imagePullPolicy: Always
           name: capstone-mlapp
           ports:
@@ -30,10 +30,10 @@
             protocol: TCP
           resources:
             limits:
-              cpu: "1"
+              cpu: "0.5"
               memory: 200Mi
             requests:
-              cpu: "0.5"
+              cpu: "0.2"
               memory: "150"
 
 ---

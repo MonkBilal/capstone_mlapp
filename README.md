@@ -33,12 +33,11 @@ In this project, I have deployed a Flask app on an AWS EKS platform. This applic
 * Once your Ansible playbook finishes, go to your Jenkins machine's http://jenkinsmachinepublicip:8080 for accessing Jenkins Dashboard.
 * Setup Jenkins with recommended setting and install Blue Ocean plugin.
 * Add your docker hub credentials in Jenkins.
-
-
-### Kubernetes Steps
-
+* Connect your jenkins to githubrepo.
 * Run below command from your Jenkins Machine to check your LoadBalancer service and get the external IP for your app.
   kubectl get svc
+  NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP                                                                PORT(S)        AGE
+capstone-mlapp-service   LoadBalancer   10.100.xx.xx   a08de26ad6c2xxxxxxxssxsssss249b800c9adq13130-XXXXXX.XXXXX.elb.amazonaws.com   80:31591/TCP   73m
 
 ### Testing your app
 
@@ -50,3 +49,4 @@ In this project, I have deployed a Flask app on an AWS EKS platform. This applic
 * Ansible Installation Guide: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 * Creating AWS account: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/  
 * Creating an IAM Role: https://www.eksworkshop.com/020_prerequisites/iamrole/
+* Connect jenkins to github : https://sciencetechvideos.wordpress.com/2018/12/10/getting-started-with-blue-ocean-using-jenkins/

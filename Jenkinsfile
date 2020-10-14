@@ -18,7 +18,7 @@ make install
     stage('Build') {
       steps {
         script {
-          dockerImage = docker.build registry + ":green"
+          dockerImage = docker.build registry + ":greenv1"
         }
 
       }
