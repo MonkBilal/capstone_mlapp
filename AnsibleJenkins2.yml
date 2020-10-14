@@ -1,0 +1,103 @@
+- hosts: JenkinsMaster
+  become: true
+  gather_facts: no
+  tasks:
+
+  - name: "Update package list"
+    apt:
+      update_cache: yes
+
+  - name: Installing dependencies.
+    apt:
+      name:
+        - curl
+        - apt-transport-https
+        - gnupg
+        - openjdk-11-jdk
+        - ca-certificates
+        - software-properties-common
+        - python3-pip
+        - python3-venv
+      state: present
+
+  - name: Adding Jenkins apt repository key.
+    shell: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+  - name: Adding Jenkins apt repository.
+    apt_repository:
+      repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+      state: present
+
+  - name: Adding docker apt repository key
+    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+  - name: Adding docker apt repository for bionic.
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+      state: present
+
+  - name: Updating package list
+    apt:
+      update_cache: yes
+
+  - name: Installing Jenkins
+    apt:
+      name:
+        - jenkins
+      state: present
+
+  - name: Ensuring Jenkins is running and enabled.
+    service:
+      name: jenkins
+      state: started
+      enabled: yes
+
+  - name: Installing docker
+    package: name=docker-ce state=present
+
+  - name: Ensuring docker is running and enabled.
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Adding the users jenkins and ubuntu to docker group.
+    user:
+     name: "{{ item }}"
+     groups: docker
+     append: yes
+    with_items:
+      - jenkins
+      - ubuntu
+
+  - name: Installing aws cli.
+    pip:
+      name: awscli
+
+  - name: Installing eksctl,
+    shell: curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp && mv /tmp/eksctl /usr/local/bin
+
+  - name: Installing and configuring kubectl.
+    get_url:
+      url: https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.9/2020-08-04/bin/linux/amd64/kubectl
+      dest: /usr/local/bin/
+      mode: +x
+
+  - name: Installing and configuring Hadolint.
+    get_url:
+      url: https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
+      dest: /usr/local/bin/hadolint
+      mode: +x
+
+  - name: Copying cluster creation script.
+    copy:
+      src: cluster.yml
+      dest: /home/ubuntu/cluster.yml
+    tags:
+     - create cluster  
+
+  - name: Creating eks cluster
+    become: false
+    shell: eksctl create cluster -f /home/ubuntu/cluster.yml & 
+    tags:
+     - create cluster
