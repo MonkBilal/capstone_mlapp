@@ -11,7 +11,7 @@ In this project, I have deployed a Flask app on an AWS EKS platform. This applic
 * An AWS account
 * A Linux machine with Ansible installed.
 * Git repository
-* dockerhub
+* Dockerhub repository
 
 
 ## Setup the Environment
