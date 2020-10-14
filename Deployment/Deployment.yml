@@ -22,7 +22,7 @@
           app: capstone-mlapp
       spec:
         containers:
-        - image: monkbilal/capstone_mlapp:blue
+        - image: monkbilal/capstone_mlapp:green
           imagePullPolicy: Always
           name: capstone-mlapp
           ports:
