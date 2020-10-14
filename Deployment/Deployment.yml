@@ -2,15 +2,15 @@
   apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: capstone-green-a
+    name: capstone
     labels:
-      app: capstone-mlapp-green-a
+      app: capstone-mlapp
     namespace: default
   spec:
     replicas: 2
     selector:
       matchLabels:
-        app: capstone-mlapp-green-a
+        app: capstone-mlapp
     strategy:
       rollingUpdate:
         maxSurge: 25%
@@ -19,12 +19,12 @@
     template:
       metadata:
         labels:
-          app: capstone-mlapp-green-a
+          app: capstone-mlapp
       spec:
         containers:
-        - image: monkbilal/mlapp:green
+        - image: monkbilal/capstone_mlapp:blue
           imagePullPolicy: Always
-          name: capstone-mlapp-green-a
+          name: capstone-mlapp
           ports:
           - containerPort: 80
             protocol: TCP
@@ -49,4 +49,3 @@
      - protocol: TCP
        targetPort: 80
        port: 80
-

@@ -18,7 +18,7 @@ make install
     stage('Build') {
       steps {
         script {
-          dockerImage = docker.build registry + ":latest"
+          dockerImage = docker.build registry + ":blue"
         }
 
       }
