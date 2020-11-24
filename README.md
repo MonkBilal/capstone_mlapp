@@ -36,8 +36,9 @@ In this project, I have deployed a Flask app on an AWS EKS platform. This applic
 * Connect your jenkins to githubrepo.
 * Run below command from your Jenkins Machine to check your LoadBalancer service and get the external IP for your app.
   kubectl get svc
-  NAME           |          TYPE    |       CLUSTER-IP  |    EXTERNAL-IP                                                           |     PORT(S)  | AGE
-capstone-mlapp-service |  LoadBalancer |   10.100.xx.xx   |a08de26ad6c2xxxxxxxssxsssss249b800c9adq13130-XXXXXX.XXXXX.elb.amazonaws.com |  80:31591/TCP |  73m
+  | NAME                   |  TYPE         | CLUSTER-IP       |    EXTERNAL-IP                                                              |     PORT(S)   | AGE  |
+  | :----------------------: | :------------: | :----------------: | :--------------------------------------------------------------------------: | :-------------: | :---: |
+  | capstone-mlapp-service | LoadBalancer |   10.100.xx.xx   | a08de26ad6c2xxxxxxxssxsssss249b800c9adq13130-XXXXXX.XXXXX.elb.amazonaws.com |  80:31591/TCP |  73m|
 
 ### Testing your app
 
